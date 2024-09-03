@@ -1,9 +1,9 @@
 import { Stack } from "@mui/material";
-import { useProductList } from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import { getProductList } from "../../services/product";
 
 export function productList() {
-  const list = useProductList();
+  const list = getProductList();
   const navigate = useNavigate();
 
   const itemContainer = (item: any) => (
@@ -19,7 +19,7 @@ export function productList() {
 
   return (
     <Stack direction={"row"} gap={3} sx={{ width: "100%", flexFlow: "wrap" }}>
-      {list.map((item) => itemContainer(item))}
+      {list.data?.map((item) => itemContainer(item))}
     </Stack>
   );
 }

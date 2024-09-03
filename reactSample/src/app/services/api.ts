@@ -1,4 +1,6 @@
-export function useProductList() {
+import { getData } from "./axiosProvider";
+
+export function useProductListFake() {
   return [
     {
       id: 1,
@@ -21,4 +23,18 @@ export function useProductList() {
       name: "product 5",
     },
   ];
+}
+
+export interface productItem {
+  id: string;
+  name: string;
+}
+export async function useProductList(): Promise<productItem[]> {
+  const list = await getData("/data.json");
+  return list.data?.data?.map((i: any) => {
+    return {
+      id: i.id,
+      name: i.name,
+    } satisfies productItem;
+  });
 }

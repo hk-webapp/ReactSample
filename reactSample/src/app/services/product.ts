@@ -1,5 +1,12 @@
 import { useQuery } from "react-query";
-import { useProductList } from "./api";
+import {  useProductList, useProductListFake } from "./api";
+
+export function getProductListFake(){
+    return useQuery({
+		queryFn: () => useProductListFake(),
+		queryKey: ['product-list'],
+	});
+}
 
 export function getProductList(){
     return useQuery({
